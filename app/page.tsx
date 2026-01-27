@@ -26,8 +26,8 @@ export default function Home() {
               Go to Dashboard <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
           </Button>
-          <Button variant="outline" size="lg">
-            View Documentation
+          <Button variant="outline" size="lg" asChild>
+            <Link href="/docs">View Documentation</Link>
           </Button>
         </div>
       </main>
