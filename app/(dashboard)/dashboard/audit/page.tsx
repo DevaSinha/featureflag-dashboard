@@ -24,16 +24,7 @@ import {
 } from "@/components/ui/table";
 import { ShieldCheck, Search, Filter, RefreshCw, Loader2 } from "lucide-react";
 
-interface AuditLog {
-    id: string;
-    user_email?: string;
-    user_id: string;
-    entity_type: string;
-    entity_id: string;
-    action: string;
-    changes?: any;
-    created_at: string;
-}
+import type { AuditLog } from "@/lib/types";
 
 const entityTypes = ["ALL", "FLAG", "EXPERIMENT", "PROJECT", "API_KEY", "MEMBER", "ORGANIZATION", "ENVIRONMENT", "RULE"];
 const actionTypes = ["ALL", "CREATE", "UPDATE", "DELETE", "ENABLE", "DISABLE", "INVITE", "REMOVE"];
@@ -108,7 +99,7 @@ export default function AuditLogsPage() {
         const query = searchQuery.toLowerCase();
         return (
             log.entity_id?.toLowerCase().includes(query) ||
-            log.user_email?.toLowerCase().includes(query) ||
+            log.actor_name?.toLowerCase().includes(query) ||
             log.entity_type?.toLowerCase().includes(query)
         );
     });
@@ -226,7 +217,7 @@ export default function AuditLogsPage() {
                                             </Badge>
                                         </TableCell>
                                         <TableCell className="text-muted-foreground">
-                                            {log.user_email || log.user_id.substring(0, 8) + "..."}
+                                            {log.actor_name || log.actor_id.substring(0, 8) + "..."}
                                         </TableCell>
                                         <TableCell className="text-right text-muted-foreground">
                                             {formatTimeAgo(log.created_at)}

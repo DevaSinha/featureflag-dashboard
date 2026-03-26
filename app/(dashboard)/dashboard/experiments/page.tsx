@@ -36,7 +36,7 @@ interface Experiment {
     id: string;
     flag_id: string;
     name: string;
-    description: string;
+    description?: string;
     status: string;
     tracked_events: string[];
     created_at: string;
@@ -104,7 +104,7 @@ export default function ExperimentsPage() {
     const viewMetrics = async (expId: string) => {
         const response = await api.getExperimentMetrics(expId);
         if (response.success && response.data) {
-            setSelectedMetrics(response.data);
+            setSelectedMetrics(response.data as unknown as Metrics);
             setMetricsDialogOpen(true);
         }
     };

@@ -14,8 +14,10 @@ import {
     LogOut,
     Building2,
     FolderKanban,
+    Sparkles,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Kbd } from "@/components/ui/kbd";
 import {
     Select,
     SelectContent,
@@ -130,6 +132,17 @@ export function Sidebar({ className }: { className?: string }) {
                 {/* Navigation */}
                 <div className="px-3 py-2">
                     <div className="space-y-1">
+                        <Button
+                            variant="default"
+                            className="w-full justify-start mt-2 mb-4 bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white border-0"
+                            onClick={() => document.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', metaKey: true }))}
+                        >
+                            <Sparkles className="mr-2 h-4 w-4" />
+                            AI Assistant
+                            <div className="ml-auto opacity-70">
+                                <Kbd className="bg-white/20 text-white border-white/10 uppercase">⌘K</Kbd>
+                            </div>
+                        </Button>
                         {sidebarItems.map((item) => (
                             <Button
                                 key={item.href}

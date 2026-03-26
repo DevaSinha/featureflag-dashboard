@@ -66,7 +66,7 @@ export function Header() {
     };
 
     return (
-        <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <header className="sticky top-0 z-50 w-full border-b border-zinc-200/50 dark:border-zinc-800/50 bg-white/70 dark:bg-zinc-950/70 backdrop-blur-md supports-[backdrop-filter]:bg-white/50 supports-[backdrop-filter]:dark:bg-zinc-950/50">
             <div className="flex h-14 items-center px-4 gap-4">
                 {/* Mobile Sidebar Trigger */}
                 <Sheet>
@@ -91,9 +91,9 @@ export function Header() {
                     {/* Feedback Button */}
                     <Dialog open={feedbackDialogOpen} onOpenChange={setFeedbackDialogOpen}>
                         <DialogTrigger asChild>
-                            <Button variant="outline" size="sm">
-                                <MessageSquare className="h-4 w-4 mr-2" />
-                                Feedback
+                            <Button variant="outline" size="sm" className="px-2 sm:px-3">
+                                <MessageSquare className="h-4 w-4 sm:mr-2" />
+                                <span className="hidden sm:inline">Feedback</span>
                             </Button>
                         </DialogTrigger>
                         <DialogContent>
@@ -142,9 +142,9 @@ export function Header() {
                     {isAuthenticated && organization && (
                         <Dialog open={projectDialogOpen} onOpenChange={setProjectDialogOpen}>
                             <DialogTrigger asChild>
-                                <Button size="sm">
-                                    <Plus className="h-4 w-4 mr-2" />
-                                    New Project
+                                <Button size="sm" className="px-2 sm:px-3">
+                                    <Plus className="h-4 w-4 sm:mr-2" />
+                                    <span className="hidden sm:inline">New Project</span>
                                 </Button>
                             </DialogTrigger>
                             <DialogContent>
