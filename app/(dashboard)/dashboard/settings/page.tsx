@@ -48,14 +48,7 @@ interface Environment {
     name: string;
 }
 
-interface Member {
-    id: string;
-    user_id: string;
-    email: string;
-    name: string;
-    role: string;
-    created_at: string;
-}
+import type { OrgMember } from "@/lib/types";
 
 export default function SettingsPage() {
     const { organization, project, user, logout } = useAuth();
@@ -72,7 +65,7 @@ export default function SettingsPage() {
     const [copiedKey, setCopiedKey] = useState(false);
 
     // Members state
-    const [members, setMembers] = useState<Member[]>([]);
+    const [members, setMembers] = useState<OrgMember[]>([]);
     const [loadingMembers, setLoadingMembers] = useState(false);
     const [inviteDialog, setInviteDialog] = useState(false);
     const [inviting, setInviting] = useState(false);
@@ -113,7 +106,7 @@ export default function SettingsPage() {
         setCreatingKey(true);
         const response = await api.createApiKey(project.id, newKey.environment_id, newKey.name);
         if (response.success && response.data) {
-            setGeneratedKey(response.data.key);
+            setGeneratedKey(response.data.key || null);
             fetchApiKeys();
         }
         setCreatingKey(false);
@@ -446,8 +439,8 @@ export default function SettingsPage() {
                                             <TableRow key={member.id}>
                                                 <TableCell>
                                                     <div>
-                                                        <p className="font-medium">{member.name || "Unknown"}</p>
-                                                        <p className="text-sm text-muted-foreground">{member.email}</p>
+                                                        <p className="font-medium">{member.user?.name || "Unknown"}</p>
+                                                        <p className="text-sm text-muted-foreground">{member.user?.email}</p>
                                                     </div>
                                                 </TableCell>
                                                 <TableCell>

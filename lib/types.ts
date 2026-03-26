@@ -143,6 +143,7 @@ export interface OrgMember {
   user_id: string;
   org_id: string;
   role: string;
+  created_at: string;
   user?: User;
 }
 
